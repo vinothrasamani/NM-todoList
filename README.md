@@ -1,9 +1,5 @@
 # To-Do List
-     In a fast-paced and digital world, staying organized and managing daily tasks efficiently has become a fundamental challenge. The To-Do List React app is designed to address this challenge by providing a user-friendly, feature-rich solution for individuals and teams to manage their tasks, prioritize responsibilities, and enhance productivity.
-![image](https://github.com/vinothrasamani/Todolist/assets/131843740/b1ff38d0-3873-4207-aa8e-3776823fa3bf)
-
-
-
+  ####   In a fast-paced and digital world, staying organized and managing daily tasks efficiently has become a fundamental challenge. The To-Do List React app is designed to address this challenge by providing a user-friendly, feature-rich solution for individuals and teams to manage their tasks, prioritize responsibilities, and enhance productivity.
 
 
 # Getting Started with Create React App
