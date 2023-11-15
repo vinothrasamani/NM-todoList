@@ -1,43 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+<head>
+    <title>to do list</title>
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+.container{
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #12255b, #240030);
+    padding: 10px;
+}
+.todo-app{
+    width:100%;
+    max-width: 540px;
+    background: white;
+    margin: 100px auto 20px;
+    padding: 40px 30px 70px;
+    border-radius: 10px;
+}
+.todo-app h2{
+    color: #002765;
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.todo-app h2 img{
+    width: 30px;
+    margin-left: 10px;
+}
+.row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #bfbebe;
+    border-radius: 25px;
+    padding-left: 20px;
+    margin-top: 25px;
+}
+input{
+    flex: 1;
+    border:none;
+    outline:none;
+    font-size: 14px;
+    background: transparent;
+    padding: 10px;
+    color: rgb(35, 34, 34);
+}
+button{
+    border: none;
+    padding: 16px 50px;
+    outline: none;
+    background: #003203;
+    color: azure;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 40px;
+}
+ul li{
+    list-style: none;
+    font-size: 17px;
+    padding: 12px 8px 12px 50px;
+    user-select: none;
+    cursor: pointer;
+    position: relative;
+}
+ul li::before{
+    content: '';
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-image: url("asset/unchecked.png");
+    background-size: cover;
+    background-position: center;
+    top: 12px;
+    left: 8px;
+}
+ul li.checked{
+    color: #2c2c2c;
+    text-decoration: line-through;
+}
+ul li.checked::before{
+    background-image: url("asset/checked.png");
+}
+ul li span{
+    position: absolute;
+    right: 0;
+    top: 5px;
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+    color: #1d1d1d;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+}
+ul li span:hover{
+    background-color: rgb(110, 109, 108);
+}
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="todo-app">
+            <h2>To-Do list <img src="asset/icon.png" alt=""></h2>
+            <div class="row">
+                <input type="text" id="input-box" value="" placeholder="Add your text">
+                <button onclick= "my_fun()">Add</button>
+            </div>
+            <ul id="list">
+               <!-- <li class="checked">Task  1</li>
+                <li>Task  2</li>
+                <li>Task  3</li>-->
+            </ul>
+        </div>
+        <script type="text/javascript">
+            const inputbox=document.getElementById("input-box");
+            const list = document.getElementById("list");
+    
+            function my_fun()
+            {
+                if(inputbox.value === ''){
+                    alert("You must enter something in the bar!");
+                }
+                else{
+                    let li =document.createElement("li");
+                    li.innerHTML = inputbox.value;
+                    list.appendChild(li);
+                    let span = document.createElement("span");
+                    span.innerHTML = "\u00d7";
+                    li.appendChild(span);
+                }
+                inputbox.value = '';
+                savedata();
+            }
+            list.addEventListener("click", function(e){
+                if(e.target.tagName === "LI")
+                {
+                    e.target.classList.toggle("checked");
+                    savedata();
+                }
+                else if(e.target.tagName === "SPAN")
+                {
+                    e.target.parentElement.remove();
+                    savedata();
+                }
+            }, false);
+            function savedata(){
+                localStorage.setItem("data",list.innerHTML);
+            }
+            function showdata(){
+                list.innerHTML = localStorage.getItem("data");
+            }
+            showdata()
+        </script>
+    </div>
+</body>
 </html>
